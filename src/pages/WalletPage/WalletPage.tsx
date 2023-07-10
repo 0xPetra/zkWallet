@@ -1,4 +1,5 @@
-import { Text, Button, Box, SimpleGrid } from '@chakra-ui/react'
+import { Box, Text, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Heading, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import { invoke } from '@tauri-apps/api/tauri'
 import { IoLogInOutline } from 'react-icons/io5'
@@ -21,6 +22,7 @@ const WalletPage: React.FC = () => {
 
   const [rustMsg, setRustMessage] = useState<string>('N/A')
   const [isMaxsize, setIsMaxsize] = useState<boolean>(false);
+  const [hasWallet, setHasWallet] = useState<boolean>(false);
 
   useEffect(() => {
     appWindow.isMaximized().then(setIsMaxsize);
@@ -39,53 +41,73 @@ const WalletPage: React.FC = () => {
     setIsMaxsize(isMaximized);
   }
 
-  return (
-    <SimpleGrid columns={2} spacing={5}>
-      <BoxAction title="Message to backend" icon={IoLogInOutline}>
-        <Text>Hello World from Tauri Typescript React!</Text>
+  const WalletInstance = () => {
+    return (
+      <>
+        <Tabs isLazy>
+          <TabList>
+            <Tab>Balances</Tab>
+            <Tab>Transfer</Tab>
+            <Tab>Receive</Tab>
+          </TabList>
 
-        <BoxFieldset label="Action">
-          <Button onClick={callTauriBackend} width="100%">Get message from rust backend</Button>
-        </BoxFieldset>
-        <BoxFieldset label="Response">
-          {rustMsg && (
-            <h2>{rustMsg}</h2>
-          )}
-        </BoxFieldset>
+          <TabPanels>
+            <TabPanel>
+              {/* Balances UI */}
+              <Box p={4} bg="gray.200" borderRadius="md">
+                {/* Balances content goes here */}
+                <p>Display your balances here</p>
+              </Box>
+            </TabPanel>
 
-      </BoxAction>
+            <TabPanel>
+              {/* Transfer UI */}
+              <Box p={4} bg="gray.200" borderRadius="md">
+                {/* Transfer content goes here */}
+                <p>Transfer crypto here</p>
+              </Box>
+            </TabPanel>
 
-      <BoxAction title="Window Actions" icon={BsWindow}>
-        <Text>Hello World from Tauri Typescript React!</Text>
+            <TabPanel>
+              {/* Receive UI */}
+              <Box p={4} bg="gray.200" borderRadius="md">
+                {/* Receive content goes here */}
+                <p>Receive crypto here</p>
+              </Box>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </>
+    )
+  }
 
-        <BoxFieldset label="Action" display="flex" gap={2} >
-          <ButtonWithIcon
-            label="Close" icon={VscChromeClose}
-            onClick={() => appWindow.close()} />
-          <ButtonWithIcon
-            label={isMaxsize ? "Restore" : "Maximize"}
-            icon={isMaxsize ? VscChromeRestore : VscChromeMaximize}
-            onClick={handleMaximization}
-          />
-          <ButtonWithIcon
-            label="Minimize" icon={VscChromeMinimize}
-            onClick={() => appWindow.minimize()}
-          />
-        </BoxFieldset>
-        <BoxFieldset label="Extras" display="flex" gap={2}>
-          <Box
-            width="80px" height="50px"
-            backgroundColor="secondary.500"
-            display="flex"
-            borderRadius="base"
-            data-tauri-drag-region
-          >
-            <Text fontSize="12px" textAlign="center" m="auto" data-tauri-drag-region>Drag here</Text>
+  const CreateWallet = () => {
+    return (
+      <Box maxW="400px" mx="auto" p={4}>
+        <Heading as='h5' mb={4}>Create a Wallet</Heading>
+        <form>
+          <FormControl mb={4}>
+            <FormLabel>Wallet Name</FormLabel>
+            <Input type="text" placeholder="Enter wallet name" />
+          </FormControl>
+          <FormControl mb={4}>
+            <FormLabel>Private Key</FormLabel>
+            <Input type="password" placeholder="0x..." />
+          </FormControl>
+          <Box display="flex" justifyContent="flex-end">
+            <Button type="submit">
+              Create Wallet
+            </Button>
           </Box>
-        </BoxFieldset>
+        </form>
+      </Box>
+    )
+  }
 
-      </BoxAction>
-    </SimpleGrid>
+  return (
+    <BoxAction title="Wallet" icon={IoLogInOutline}>
+      {hasWallet ? <WalletInstance /> : <CreateWallet />}
+    </BoxAction>
   )
 }
 
