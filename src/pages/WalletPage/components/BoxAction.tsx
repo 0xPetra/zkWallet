@@ -14,7 +14,7 @@ export const BoxAction = (props: BoxActionProps) => {
     <Box
       width="400px"
       height="auto"
-      background="primary.900"
+      background="neutrals.500"
       borderRadius="md"
       padding={3}
       position="relative"

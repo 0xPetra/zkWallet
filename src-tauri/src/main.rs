@@ -3,13 +3,15 @@
   all(not(debug_assertions), target_os = "windows"),
   windows_subsystem = "windows"
 )]
-
 use std::time::{SystemTime, UNIX_EPOCH};
 use tauri::Manager; // used by .get_window
 use tauri::{self, SystemTrayEvent, SystemTrayMenuItem};
 use tauri::{CustomMenuItem, SystemTray, SystemTrayMenu};
 use tauri_plugin_store::PluginBuilder;
-// use tauri_plugin_window_state;
+use zksync_web3_rs as zksync;
+
+use zksync::prelude::k256::ecdsa::SigningKey;
+use zksync::signers::{Signer, Wallet};
 
 #[derive(Clone, serde::Serialize)]
 struct SingleInstancePayload {
@@ -32,6 +34,23 @@ fn get_epoch_ms() -> u128 {
 #[tauri::command]
 async fn message_from_rust(window: tauri::Window) -> Result<CustomResponse, String> {
   println!("Called from {}", window.label());
+  Ok(CustomResponse {
+    message: format!("Hello from rust!\nTime: {}", get_epoch_ms()),
+  })
+}
+
+#[tauri::command]
+async fn create_zksync_wallet(
+  window: tauri::Window,
+  ethereumpk: String,
+) -> Result<CustomResponse, String> {
+  println!("Called from ==>> {} and {:?}", window.label(), ethereumpk);
+
+  let private_key: Wallet<SigningKey> = ethereumpk.parse().unwrap();
+  let zksync_era_chain_id: u64 = 270;
+
+  let wallet = Wallet::with_chain_id(private_key, zksync_era_chain_id);
+
   Ok(CustomResponse {
     message: format!("Hello from rust!\nTime: {}", get_epoch_ms()),
   })
@@ -95,6 +114,7 @@ fn main() {
       _ => {}
     })
     .invoke_handler(tauri::generate_handler![message_from_rust])
+    .invoke_handler(tauri::generate_handler![create_zksync_wallet])
     .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
       app
         .emit_all(
