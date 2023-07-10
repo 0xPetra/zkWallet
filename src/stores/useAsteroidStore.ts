@@ -1,4 +1,4 @@
-import create, {State} from "zustand";
+import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { create as mutativeCreate, Draft } from 'mutative';
 
@@ -10,7 +10,7 @@ export interface AsteroidStore {
 }
 
 export const mutative = (config) =>
-(set, get) => config((fn) => set(mutativeCreate(fn)), get);
+  (set, get) => config((fn) => set(mutativeCreate(fn)), get);
 
 type StoreSet = (fn: (draft: Draft<AsteroidStore>) => void) => void;
 
@@ -23,7 +23,7 @@ const store = (set: StoreSet) => ({
   },
   decreaseAsteroids: () => {
     set((state) => {
-      if(state.asteroids > 0) {
+      if (state.asteroids > 0) {
         state.asteroids--;
       }
     });

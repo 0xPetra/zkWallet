@@ -4,12 +4,12 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::{Manager}; // used by .get_window
+use std::time::{SystemTime, UNIX_EPOCH};
+use tauri::Manager; // used by .get_window
 use tauri::{self, SystemTrayEvent, SystemTrayMenuItem};
 use tauri::{CustomMenuItem, SystemTray, SystemTrayMenu};
 use tauri_plugin_store::PluginBuilder;
-use tauri_plugin_window_state;
-use std::time::{SystemTime, UNIX_EPOCH};
+// use tauri_plugin_window_state;
 
 #[derive(Clone, serde::Serialize)]
 struct SingleInstancePayload {
@@ -24,16 +24,16 @@ struct CustomResponse {
 
 fn get_epoch_ms() -> u128 {
   SystemTime::now()
-      .duration_since(UNIX_EPOCH)
-      .unwrap()
-      .as_millis()
+    .duration_since(UNIX_EPOCH)
+    .unwrap()
+    .as_millis()
 }
 
 #[tauri::command]
 async fn message_from_rust(window: tauri::Window) -> Result<CustomResponse, String> {
   println!("Called from {}", window.label());
   Ok(CustomResponse {
-    message: format!("Hello from rust!\nTime: {}", get_epoch_ms())
+    message: format!("Hello from rust!\nTime: {}", get_epoch_ms()),
   })
 }
 

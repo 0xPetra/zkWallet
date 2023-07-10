@@ -1,6 +1,6 @@
 {
   "package": {
-    "productName": "Tauri Boilerplate",
+    "productName": "zk Wallet",
     "version": "1.0.0"
   },
   "build": {
@@ -29,7 +29,7 @@
       "resources": [],
       "externalBin": [],
       "copyright": "",
-      "category": "Game",
+      "category": "Privacy",
       "shortDescription": "",
       "longDescription": "",
       "deb": {
@@ -56,7 +56,7 @@
     },
     "windows": [
       {
-        "title": "Tauri Starter Boilerplate",
+        "title": "zkWallet",
         "label": "main",
         "minWidth": 1280,
         "minHeight": 720,

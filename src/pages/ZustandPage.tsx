@@ -13,16 +13,16 @@ const ZustandPage = () => {
 
   return (
     <>
-    <Image src="./src/assets/images/technologies/zustand.png" width="200px"/>
-    <VStack>
-      <Text>Asteroids: {asteroids}</Text>
+      <Image src="./src/assets/images/technologies/zustand.png" width="200px" />
+      <VStack>
+        <Text>Asteroids: {asteroids}</Text>
 
-      <HStack>
-        <Button onClick={() => increaseAsteroids()}>Add asteroid</Button>
-        <Button onClick={() => decreaseAsteroids()}>Remove asteroid</Button>
-      </HStack>
-      <Button onClick={() => removeAllAsteroids()}>Remove all Asteroids</Button>
-    </VStack>
+        <HStack>
+          <Button onClick={() => increaseAsteroids()}>Add asteroid</Button>
+          <Button onClick={() => decreaseAsteroids()}>Remove asteroid</Button>
+        </HStack>
+        <Button onClick={() => removeAllAsteroids()}>Remove all Asteroids</Button>
+      </VStack>
     </>
   )
 }
