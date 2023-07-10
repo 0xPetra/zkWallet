@@ -72,7 +72,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}>
       <Box
         position="absolute"
-        bg="primary.700" height="100%" width="100%" blur="3xl" opacity={0.4} zIndex={-1}
+        bg="black.700" height="100%" width="100%" blur="3xl" opacity={0.4} zIndex={-1}
         data-tauri-drag-region
         pointerEvents="none" userSelect="none" />
       <Flex h="20" alignItems="center" mx="8" gap={2} data-tauri-drag-region cursor="grab">
@@ -102,7 +102,7 @@ const NavItem = ({ icon, children, to, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'primary.700',
+          bg: 'primary.800',
           color: 'white',
         }}
         _active={{

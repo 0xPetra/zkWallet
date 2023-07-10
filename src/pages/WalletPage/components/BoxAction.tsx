@@ -14,7 +14,7 @@ export const BoxAction = (props: BoxActionProps) => {
     <Box
       width="400px"
       height="auto"
-      background="primary.600"
+      background="primary.900"
       borderRadius="md"
       padding={3}
       position="relative"
@@ -24,7 +24,7 @@ export const BoxAction = (props: BoxActionProps) => {
       <Box as="span"
         position="absolute"
         display="flex" top={-4}
-        background="primary.500"
+        background="primary.800"
         p={2}
         borderRadius="base"
         _groupHover={{

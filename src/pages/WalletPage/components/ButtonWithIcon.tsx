@@ -13,7 +13,7 @@ export const ButtonWithIcon = (props: ButtonWithIconProps) => {
   return (
     <Button {...restProps} py={1} px={2}>
       <Box w="24px" h="24px"
-        backgroundColor="primary.600"
+        backgroundColor="primary.800"
         borderRadius="base" display="flex"
         justifyContent="center"
         alignItems="center" opacity={0.7} mr={1}

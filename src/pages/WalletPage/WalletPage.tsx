@@ -4,7 +4,7 @@ import { invoke } from '@tauri-apps/api/tauri'
 import { IoLogInOutline } from 'react-icons/io5'
 import { BsWindow } from 'react-icons/bs';
 import { appWindow } from "@tauri-apps/api/window";
-import { BoxAction, BoxFieldset, ButtonWithIcon } from '@/pages/TauriPage/components';
+import { BoxAction, BoxFieldset, ButtonWithIcon } from '@/pages/WalletPage/components';
 
 import {
   VscChromeClose,
@@ -75,7 +75,7 @@ const WalletPage: React.FC = () => {
         <BoxFieldset label="Extras" display="flex" gap={2}>
           <Box
             width="80px" height="50px"
-            backgroundColor="primary.500"
+            backgroundColor="secondary.500"
             display="flex"
             borderRadius="base"
             data-tauri-drag-region
